@@ -1,0 +1,124 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="football" %>
+
+<%! CURSOR CUR_LEAGUE IS
+        SELECT YEAR
+        FROM LEAGUE;
+%>
+<HTML>
+<HEAD>
+	<TITLE>Football</TITLE>
+	<STYLE>
+		body {
+			min-width: 630px;
+			margin: 0;
+                        padding: 0;
+                        font-family:Sans-serif;
+                        line-height: 1.5em;
+		}
+
+		#container {
+			
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+			padding-top: 1em;
+		}
+		
+		#center {
+			padding: 10px 20px;
+		}
+		
+		#left {
+			width: 300px;
+			padding: 10px;
+			height:100%;
+			background: #aad4ff;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			color: #003f7f;
+		}
+
+		#header {
+			font-size: 50px;
+			padding: 0.3em;
+			background: #003f7f;
+			color: #e5e5e5;
+		}
+
+	</STYLE> 
+</HEAD>
+<BODY>
+	<TITLE>Football Stat Webpage</TITLE>
+	<header id="header"><p>Football Stat Webpage</p></header>
+	<div id="container">
+	<nav id="left" class="column">
+		<h3>Created by Sarah West</h3>
+		<ul>
+			<li><b>UCID:</b> sw69</li>
+			<li><b>Oracle Account:</b> CS632S852_020</li>
+		</ul>
+	</nav>
+	<main id="center" class="column">
+		<FORM METHOD=POST ACTION="football2">
+			<TABLE>
+			<TR>
+			<TD>
+			<TABLE CELLPADDING=25>
+			<TR><TD>
+			<p><b>START YEAR</b></p>
+			<SELECT name=startyear>
+				<%  FOR i IN CUR_LEAGUE LOOP %>
+        				<option>
+   		        	     	<%= i.YEAR %>
+   					</option>
+			        <% END LOOP; %>
+			</SELECT>
+			</TD>
+			<TD>
+			<p><b>END YEAR</b></p>
+			<SELECT name=endyear>
+	               	         <%  FOR i IN CUR_LEAGUE LOOP %>
+        	                        <option>
+                	                <%= i.YEAR %>
+                        	        </option>
+                       		 <% END LOOP; %>
+               		 </SELECT>
+			</TD>
+			</TR>
+			</TABLE>
+			<TR>
+				<TD style="padding-left: 25px;">
+					<INPUT type=SUBMIT value="Get League Info in Range"> 
+				</TD>
+			</TR>
+			</TABLE>
+        	</FORM>
+
+
+		<FORM METHOD=POST ACTION="football4">
+			<TABLE>
+			<TR><TD>
+			<TABLE CELLPADDING=25>
+			<TR><TD>
+		 	<b>CHAMPION:</b>  <br></TD><TD>
+  			<INPUT type="text" name="champion"><br></TD></TR>
+			</TABLE>
+			</TD></TR>
+			<TR><TD style="padding-left: 25px;">
+			<p></p>
+			<INPUT type=SUBMIT value="Get League Info in Champion">
+			</TD></TR>
+			</TABLE>
+		</FORM>
+		</main>
+	</div>
+</BODY>
+</HTML>
+

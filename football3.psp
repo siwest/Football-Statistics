@@ -1,0 +1,24 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="football3" %>
+
+<HTML>
+	<HEAD>
+		<TITLE>Error</TITLE>
+		<STYLE>
+			body {
+                padding: 20;
+                font-family:Sans-serif;
+				font-size:50px;
+				background: #aad4ff;                       
+	        }
+
+		</STYLE>
+	</HEAD>
+	<BODY>
+		<p>Error: Start Year must be before End Year. </>
+		<FORM METHOD=POST ACTION="football">
+			<p></p>
+			<INPUT type=SUBMIT value="Go back">
+		</FORM>
+	</BODY>
+</HTML>

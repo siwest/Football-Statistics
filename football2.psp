@@ -1,0 +1,101 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="football2" %>
+<%@ plsql parameter="startyear" type="number" %>
+<%@ plsql parameter="endyear" type="number" %>
+
+<%! CURSOR CUR_LEAGUE IS 
+	SELECT YEAR, LEAGUE, CHAMPION, MVP, DEFPLAYER, OFFPLAYER, DEFROOKIE, OFFROOKIE 
+		FROM LEAGUE; %>
+
+<HTML>
+	<HEAD>
+		<TITLE>Football2</TITLE>
+	<STYLE>
+		.CSSTable table{
+			background-color:#000000;
+			border:1px solid #000000;
+		}
+		.CSSTable tr:nth-child(odd){ 
+			background-color:#aad4ff; 
+		}
+		.CSSTable tr:nth-child(even){ 
+			background-color:#e5e5e5; 
+		}
+		.CSSTable td{
+			vertical-align:middle;
+			text-align:left;
+			padding:7px;
+			font-size:10px;
+			font-family:Arial;
+			font-weight:normal;
+			color:#000000;
+		}
+		.CSSTable tr:first-child {
+			background-color:#003f7f;
+			text-align:center;
+			font-size:14px;
+			font-family:Arial;
+			font-weight:bold;
+			color:#ffffff;
+		}
+	</STYLE> 
+</HEAD>
+<BODY>
+	<div class="CSSTable" >
+	
+	<% IF startyear > endyear THEN %>
+		<meta http-equiv="refresh" content="0; URL='http://prophet.njit.edu:7780/CS632S852_020/football3'" 
+/>
+	<% END IF; %>
+	<TABLE>
+		<TR>
+			<TH> YEAR </TH>
+			<TH> LEAGUE </TH>
+			<TH> CHAMPION </TH>
+			<TH> MVP </TH>
+			<TH>DEFPLAYER</TH>
+			<TH>OFFPLAYER</TH>
+			<TH>DEFROOKIE</TH>
+			<TH>OFFROOKIE</TH>
+		</TR>
+		<%  FOR i IN CUR_LEAGUE LOOP %>
+			<% if startyear <= i.YEAR then %>
+				<% if endyear >= i.YEAR then %>
+
+				<TR>
+					<TD>		
+                        <%= i.YEAR %>
+					</TD>
+                        <TD>
+                            <%= i.LEAGUE %>
+                        </TD>
+                        <TD>
+                            <%= i.CHAMPION %>
+                        </TD>
+                        <TD>
+                            <%= i.MVP %>
+                        </TD>
+                        <TD>
+                            <%= i.DEFPLAYER %>
+                        </TD>
+                        <TD>
+                            <%= i.OFFPLAYER %>
+                        </TD>
+                        <TD>
+                            <%= i.DEFROOKIE %>
+                        </TD>
+                        <TD>
+                            <%= i.OFFROOKIE %>
+                        </TD>
+				</TR>
+               		<% END IF; %>
+			<% END IF; %>         
+                <% END LOOP; %>
+		</TABLE>
+		</div>
+<FORM METHOD=POST ACTION="football">
+<p></p>
+<INPUT type=SUBMIT value="Go back">
+</FORM>
+</BODY>
+</HTML>
